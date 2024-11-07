@@ -61,5 +61,3 @@ const createPost = () => ({
 });
 
 const postGenerator = Array.from({length: POSTS_COUNT}, createPost);
-
-console.log(postGenerator);
