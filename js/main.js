@@ -22,6 +22,8 @@ function createRandomIdFromRangeGenerator (min, max) {
 
 const randomId = createRandomIdFromRangeGenerator(1, 25);
 
+const randomCommentId = createRandomIdFromRangeGenerator(26, 800);
+
 const descriptionText = [
   'Сегодня приехали на пляж. Нам очень понравилось!',
   'Съёмки природы с моей камеры',
@@ -50,7 +52,7 @@ const createPost = (num) => ({
   description: getRandomArrayElement(descriptionText),
   likes: getRandomInteger(15, 200),
   comments: Array.from({ length: getRandomInteger(0, 30) }, () => ({
-    id: createRandomIdFromRangeGenerator(26, 800),
+    id: randomCommentId(),
     avatar: `img/avatar-${getRandomInteger(1, 6)}.svg`,
     message: Array.from({ length: getRandomInteger(1, 2) }, () => (
       getRandomArrayElement(messageText)
