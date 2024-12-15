@@ -20,8 +20,4 @@ function createRandomIdFromRangeGenerator (min, max) {
   };
 }
 
-export { getRandomInteger };
-
-export { getRandomArrayElement };
-
-export { createRandomIdFromRangeGenerator };
+export { getRandomInteger, getRandomArrayElement, createRandomIdFromRangeGenerator };
