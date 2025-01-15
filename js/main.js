@@ -1,3 +1,1 @@
-import { postGenerator } from './data.js';
-
-postGenerator;
+import './pictures.js';
