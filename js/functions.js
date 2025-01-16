@@ -1,4 +1,4 @@
-// Проверка длины строки
+// Проверка длины строки и проверка на палиндром
 
 function checkStrokeLength(string, maxSymbols) {
   return string.length <= maxSymbols;
