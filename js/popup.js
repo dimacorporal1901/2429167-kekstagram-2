@@ -2,7 +2,7 @@ import { renderPictures } from './pictures';
 import { isEscapeKey, isEnterKey } from './util';
 
 const userModalElement = document.querySelector('.big-picture');
-const userModalOpenElement = document.querySelectorAll('.picture');
+
 const userModalCloseElement = userModalElement.querySelector('.big-picture__cancel');
 
 const onDocumentKeydown = (evt) => {
@@ -14,8 +14,6 @@ const onDocumentKeydown = (evt) => {
 
 function openUserModal () {
   userModalElement.classList.remove('hidden');
-  renderPictures();
-
   document.addEventListener('keydown', onDocumentKeydown);
 }
 
@@ -24,9 +22,10 @@ function closeUserModal () {
   document.removeEventListener('keydown', onDocumentKeydown);
 }
 
-userModalOpenElement.addEventListener('click', () => {
-  openUserModal();
-});
+export const renderBigPhoto = () => {
+  const userModalOpenElement = document.querySelectorAll('.picture');
+  userModalOpenElement.forEach(item => item.addEventListener('click', openUserModal));
+};
 
 userModalCloseElement.addEventListener('click', () => {
   closeUserModal();
