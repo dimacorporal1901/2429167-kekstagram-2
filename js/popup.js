@@ -1,5 +1,5 @@
-import { renderPictures } from './pictures';
 import { isEscapeKey, isEnterKey } from './util';
+import './popup-data.js';
 
 const userModalElement = document.querySelector('.big-picture');
 
