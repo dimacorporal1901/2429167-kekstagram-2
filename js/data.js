@@ -36,9 +36,7 @@ const createPost = (num) => ({
   comments: Array.from({ length: getRandomInteger(0, 30) }, () => ({
     id: randomCommentId(),
     avatar: `img/avatar-${getRandomInteger(1, 6)}.svg`,
-    message: Array.from({ length: getRandomInteger(1, 2) }, () => (
-      getRandomArrayElement(messageText)
-    )),
+    message: getRandomArrayElement(messageText),
     name: getRandomArrayElement(names),
   })),
 });
