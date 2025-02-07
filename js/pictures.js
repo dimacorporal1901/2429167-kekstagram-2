@@ -20,7 +20,7 @@ const renderPictures = () => {
     pictureElement.querySelector('.picture__img').src = url;
     pictureElement.querySelector('.picture__img').alt = description;
     pictureElement.querySelector('.picture__likes').textContent = likes;
-    pictureElement.querySelector('.picture__comments').textContent = comments.length - 1;
+    pictureElement.querySelector('.picture__comments').textContent = comments.length;
     randomUserPictureFragment.appendChild(pictureElement);
   });
 
