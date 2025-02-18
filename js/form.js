@@ -33,10 +33,3 @@ export const initUploadModal = () => {
     photoEditorResetBtn.addEventListener('click', onPhotoEditorBtnClick);
   });
 };
-
-const pristine = new pristine(uploadTextForm, {
-  classTo: 'img-upload__field-wrapper',
-  errorClass: 'img-upload__field-wrapper-error',
-  errorTextParent: 'img-upload__field-wrapper',
-  errorTextClass: 'text-error',
-});
