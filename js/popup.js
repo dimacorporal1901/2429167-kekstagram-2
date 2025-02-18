@@ -2,11 +2,11 @@ import { isEscapeKey } from './util.js';
 import { postGenerator } from './data.js';
 import { renderComment, resetComments } from './comments.js';
 
+let pictureComments = [];
 const userModalElement = document.querySelector('.big-picture');
 const userModalElementPicture = userModalElement.querySelector('.big-picture__img img');
 const userModalCloseElement = userModalElement.querySelector('.big-picture__cancel');
 const pageBody = document.querySelector('body');
-let pictureComments = [];
 const btnCommentLoader = userModalElement.querySelector('.comments-loader');
 
 const onDocumentKeydown = (evt) => {
