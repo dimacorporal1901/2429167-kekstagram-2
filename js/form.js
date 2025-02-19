@@ -1,3 +1,4 @@
+import { isHashtagValide } from './form-hashtags-validation';
 import { isEscapeKey } from './util';
 
 const uploadFileControl = document.querySelector('.img-upload__start');
@@ -41,3 +42,11 @@ export const initUploadModal = () => {
     photoEditorResetBtn.addEventListener('click', onPhotoEditorBtnClick);
   });
 };
+
+const pristine = new Pristine(hashtagForm, {
+  classTo: 'img-upload__field-wrapper',
+  errorTextClass: 'img-upload__field-wrapper--error',
+  errorTextParent: 'img-upload__field-wrapper',
+});
+
+pristine.addValidator(hashtagForm, isHashtagValide);
