@@ -29,5 +29,31 @@ const isHashtagValide = (value) => {
       check: inputArray.some((item) => item !== '#'),
       error: 'Хештег должен начинаться с символа \'#\'',
     },
+    {
+      check: inputArray.some((item, num, array) => array.includes(item, num + 1)),
+      error: 'Хештеги не должны повторяться',
+    },
+    {
+      check: inputArray.some((item) => item.length > MAX_SYMBOLS),
+      error: `Максимальная длина одного хештега ${MAX_SYMBOLS} символов, включая решетку`,
+    },
+    {
+      check: inputArray.length > MAX_HASHTAGS,
+      error: `Нельзя указать больше ${MAX_HASHTAGS} хештегов`,
+    },
+    {
+      check: inputArray.some((item) => !/^#[a-zа-яё0-9]{1, 19}$/i.test(item)),
+      error: 'Хештег содержит недопустимые символы',
+    }
   ];
+
+  return rules.every((rule) => {
+    const isInvalid = rule.check;
+    if (isInvalid) {
+      errorMessage = rule.error;
+    }
+    return !isInvalid;
+  });
 };
+
+export { error, isHashtagValide };
