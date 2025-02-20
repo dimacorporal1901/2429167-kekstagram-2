@@ -66,3 +66,8 @@ const pristine = new Pristine(uploadForm, {
 });
 
 pristine.addValidator(hashtagForm, isHashtagValide, error);
+
+export const resetForm = () => {
+  uploadForm.reset();
+  pristine.reset();
+};

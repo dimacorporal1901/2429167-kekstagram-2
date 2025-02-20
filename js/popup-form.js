@@ -1,4 +1,5 @@
 import { isEscapeKey } from './util';
+import { resetForm } from './validation';
 
 const uploadFileControl = document.querySelector('.img-upload__start');
 const pageBody = document.querySelector('body');
@@ -31,6 +32,7 @@ function closePhotoEditor () {
   pageBody.classList.remove('modal-open');
   document.removeEventListener('keydown', onDocumentKeydown);
   photoEditorResetBtn.removeEventListener('click', onPhotoEditorBtnClick);
+  resetForm();
 }
 
 export const initUploadModal = () => {
