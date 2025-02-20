@@ -7,10 +7,6 @@ const pageBody = document.querySelector('body');
 const photoEditorForm = document.querySelector('.img-upload__overlay');
 const photoEditorResetBtn = photoEditorForm.querySelector('#upload-cancel');
 
-const uploadForm = document.querySelector('.img-upload__form');
-const hashtagForm = uploadForm.querySelector('.text__hashtags');
-const commentForm = uploadForm.querySelector('.text__description');
-
 const onPhotoEditorBtnClick = () => {
   closePhotoEditor();
 };
@@ -18,12 +14,7 @@ const onPhotoEditorBtnClick = () => {
 const onDocumentKeydown = (evt) => {
   if (isEscapeKey(evt)) {
     evt.preventDefault();
-    if(document.activeElement === hashtagForm || document.activeElement === commentForm){
-      evt.stopPropagation();
-    } else {
-      uploadForm.reset();
-      closePhotoEditor();
-    }
+    closePhotoEditor();
   }
 };
 
