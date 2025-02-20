@@ -1,8 +1,11 @@
+import { isEscapeKey } from './util.js';
+
 const MAX_SYMBOLS = 20;
 const MAX_HASHTAGS = 5;
 
 const uploadForm = document.querySelector('.img-upload__form');
 const hashtagForm = uploadForm.querySelector('.text__hashtags');
+const commentForm = uploadForm.querySelector('.text__description');
 
 let errorMessage = '';
 
@@ -66,6 +69,9 @@ const pristine = new Pristine(uploadForm, {
 });
 
 pristine.addValidator(hashtagForm, isHashtagValide, error);
+
+const onEscape = (event) => isEscapeKey(event) && event.stopPropogation();
+[hashtagForm, commentForm].forEach((item) => item.addEventListener('keydown', onEscape));
 
 export const resetForm = () => {
   uploadForm.reset();
