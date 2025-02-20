@@ -1,6 +1,9 @@
 const MAX_SYMBOLS = 20;
 const MAX_HASHTAGS = 5;
 
+const uploadForm = document.querySelector('.img-upload__form');
+const hashtagForm = uploadForm.querySelector('.text__hashtags');
+
 let errorMessage = '';
 
 const error = () => errorMessage;
@@ -55,5 +58,13 @@ const isHashtagValide = (value) => {
     return !isInvalid;
   });
 };
+
+const pristine = new Pristine(uploadForm, {
+  classTo: 'img-upload__field-wrapper',
+  errorTextClass: 'img-upload__field-wrapper--error',
+  errorTextParent: 'img-upload__field-wrapper',
+});
+
+pristine.addValidator(hashtagForm, isHashtagValide, error);
 
 export { error, isHashtagValide };

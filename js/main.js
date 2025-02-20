@@ -1,4 +1,4 @@
-import { initUploadModal } from './form.js';
+import { initUploadModal } from './popup-form.js';
 import { renderPictures } from './pictures';
 import { renderBigPhoto } from './popup.js';
 
