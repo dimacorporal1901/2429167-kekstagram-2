@@ -70,10 +70,10 @@ const pristine = new Pristine(uploadForm, {
 
 pristine.addValidator(hashtagForm, isHashtagValide, error);
 
-const onEscape = (event) => isEscapeKey(event) && event.stopPropogation();
+const onEscape = (event) => isEscapeKey(event) && event.stopPropagation();
 [hashtagForm, commentForm].forEach((item) => item.addEventListener('keydown', onEscape));
 
 export const resetForm = () => {
   uploadForm.reset();
-  pristine.reset();
+  //pristine.reset();
 };
