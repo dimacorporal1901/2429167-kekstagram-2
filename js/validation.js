@@ -45,7 +45,7 @@ const isHashtagValide = (value) => {
       error: `Нельзя указать больше ${MAX_HASHTAGS} хештегов`,
     },
     {
-      check: inputArray.some((item) => !/^#[a-zа-яё0-9]{1, 19}$/i.test(item)),
+      check: inputArray.some((item) => /^#[a-zа-яё0-9]{1, 19}$/i.test(item)),
       error: 'Хештег содержит недопустимые символы',
     }
   ];
