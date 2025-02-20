@@ -29,7 +29,7 @@ const isHashtagValide = (value) => {
       error: 'Хештеги разделяются пробелами',
     },
     {
-      check: inputArray.some((item) => item !== '#'),
+      check: inputArray.some((item) => item[0] !== '#'),
       error: 'Хештег должен начинаться с символа \'#\'',
     },
     {
@@ -66,5 +66,3 @@ const pristine = new Pristine(uploadForm, {
 });
 
 pristine.addValidator(hashtagForm, isHashtagValide, error);
-
-export { error, isHashtagValide };
