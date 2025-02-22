@@ -51,7 +51,7 @@ const onEffectChange = (evt) => {
         img.style.filter = `grayscale(${effectLevelValue.value})`;
       });
       break;
-    case 'Sepia':
+    case 'sepia':
       slider.noUiSlider.updateOptions({
         range: {
           min: 0,
@@ -64,7 +64,7 @@ const onEffectChange = (evt) => {
         img.style.filter = `sepia(${effectLevelValue.value})`;
       });
       break;
-    case 'Marvin':
+    case 'marvin':
       slider.noUiSlider.updateOptions({
         range: {
           min: 0,
@@ -77,7 +77,7 @@ const onEffectChange = (evt) => {
         img.style.filter = `invert(${effectLevelValue.value}%)`;
       });
       break;
-    case 'Phobos':
+    case 'phobos':
       slider.noUiSlider.updateOptions({
         range: {
           min: 0,
@@ -90,17 +90,17 @@ const onEffectChange = (evt) => {
         img.style.filter = `blur(${effectLevelValue.value}px`;
       });
       break;
-    case 'Heat':
+    case 'heat':
       slider.noUiSlider.updateOptions({
         range: {
-          min: 0,
-          max: 1,
+          min: 1,
+          max: 3,
         },
-        start: 0,
+        start: 1,
         step: 0.1,
       });
       slider.noUiSlider.on('update', () => {
-        img.style.filter = `brigthness(${effectLevelValue.value})`;
+        img.style.filter = `brightness(${effectLevelValue.value})`;
       });
   }
 };
