@@ -75,5 +75,5 @@ const onEscape = (event) => isEscapeKey(event) && event.stopPropagation();
 
 export const resetForm = () => {
   uploadForm.reset();
-  //pristine.reset();
+  pristine.reset();
 };
