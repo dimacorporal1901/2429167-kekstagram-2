@@ -1,6 +1,6 @@
 import { isEscapeKey } from './util.js';
-import { postGenerator } from './data.js';
 import { renderComment, resetComments } from './comments.js';
+import { renderPictures } from './pictures.js';
 
 let pictureComments = [];
 const userModalElement = document.querySelector('.big-picture');
@@ -18,7 +18,7 @@ const onDocumentKeydown = (evt) => {
 
 function openUserModal (evt) {
   const id = evt.currentTarget.dataset.id;
-  const pictureData = postGenerator.find((item) => item.id === Number(id));
+  const pictureData = renderPictures.find((item) => item.id === Number(id));
   pageBody.classList.add('modal-open');
 
   userModalElementPicture.src = pictureData.url;

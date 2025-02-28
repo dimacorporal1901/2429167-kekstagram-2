@@ -10,7 +10,6 @@ const SubmitButtonText = {
 
 const uploadFileControl = document.querySelector('.img-upload__start');
 const pageBody = document.querySelector('body');
-const errorAlert = document.querySelector('#error');
 
 const photoEditorForm = document.querySelector('.img-upload__overlay');
 const photoEditorResetBtn = photoEditorForm.querySelector('#upload-cancel');
@@ -78,14 +77,4 @@ const blockSubmitButton = () => {
 const unblockSubmitButton = () => {
   submitButton.disabled = false;
   submitButton.textContent = SubmitButtonText.IDLE;
-};
-
-const sendFormData = async (formElement) => {
-  const isValid = validate();
-  if (isValid) {
-    blockSubmitButton();
-    try {
-      await sendData(new FormData(formElement));
-    }
-  }
 };
