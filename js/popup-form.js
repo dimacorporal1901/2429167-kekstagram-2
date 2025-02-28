@@ -1,9 +1,16 @@
+import './api';
 import { onEffectChange } from './effects-slider';
 import { isEscapeKey } from './util';
 import { resetForm } from './validation';
 
+const SubmitButtonText = {
+  IDLE: 'Опубликовать',
+  SENDING: 'Публикую...',
+};
+
 const uploadFileControl = document.querySelector('.img-upload__start');
 const pageBody = document.querySelector('body');
+const errorAlert = document.querySelector('#error');
 
 const photoEditorForm = document.querySelector('.img-upload__overlay');
 const photoEditorResetBtn = photoEditorForm.querySelector('#upload-cancel');
@@ -12,6 +19,7 @@ const scaleControl = photoEditorForm.querySelector('.scale__control--value');
 const smaller = photoEditorForm.querySelector('.scale__control--smaller');
 const bigger = photoEditorForm.querySelector('.scale__control--bigger');
 const effectsList = photoEditorForm.querySelector('.effects__list');
+const submitButton = photoEditorForm.querySelector('.img-upload__submit');
 
 let photoScale = 1;
 const SCALE_STEP = 0.25;
@@ -61,3 +69,23 @@ const onBiggerClick = () => {
 smaller.addEventListener('click', onSmallerClick);
 bigger.addEventListener('click', onBiggerClick);
 effectsList.addEventListener('change', onEffectChange);
+
+const blockSubmitButton = () => {
+  submitButton.disabled = true;
+  submitButton.textContent = SubmitButtonText.SENDING;
+};
+
+const unblockSubmitButton = () => {
+  submitButton.disabled = false;
+  submitButton.textContent = SubmitButtonText.IDLE;
+};
+
+const sendFormData = async (formElement) => {
+  const isValid = validate();
+  if (isValid) {
+    blockSubmitButton();
+    try {
+      await sendData(new FormData(formElement));
+    }
+  }
+};
