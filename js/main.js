@@ -1,7 +1,13 @@
 import { initUploadModal } from './popup-form.js';
 import { renderPictures } from './pictures';
 import { renderBigPhoto } from './popup.js';
+import { getData } from './api.js';
 
-renderPictures();
-renderBigPhoto();
+getData()
+  .then((data) => {
+    renderPictures(data);
+    renderBigPhoto(data);
+  });
+
+
 initUploadModal();
