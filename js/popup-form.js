@@ -1,7 +1,8 @@
 import './api';
+import { ErrorText, sendData } from './api';
 import { onEffectChange } from './effects-slider';
-import { isEscapeKey } from './util';
-import { resetForm } from './validation';
+import { isEscapeKey, showAlert } from './util';
+import { pristine, resetForm } from './validation';
 
 const SubmitButtonText = {
   IDLE: 'Опубликовать',
@@ -77,4 +78,25 @@ const blockSubmitButton = () => {
 const unblockSubmitButton = () => {
   submitButton.disabled = false;
   submitButton.textContent = SubmitButtonText.IDLE;
+};
+
+const submitForm = (onSuccess) => {
+  photoEditorForm.addEventListener('submit', (evt) => {
+    evt.preventDefault();
+
+    const isValid = pristine.validate();
+    if (isValid) {
+      blockSubmitButton();
+      sendData(new FormData(evt.target))
+        .then(onSuccess)
+        .catch(
+          (err) => {
+            showAlert(err);
+          }
+        )
+        .finally(() => {
+          unblockSubmitButton();
+        });
+    }
+  });
 };

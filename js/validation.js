@@ -62,7 +62,7 @@ const isHashtagValide = (value) => {
   });
 };
 
-const pristine = new Pristine(uploadForm, {
+export const pristine = new Pristine(uploadForm, {
   classTo: 'img-upload__field-wrapper',
   errorTextClass: 'img-upload__field-wrapper--error',
   errorTextParent: 'img-upload__field-wrapper',

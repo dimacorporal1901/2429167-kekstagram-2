@@ -10,7 +10,7 @@ const Method = {
   POST: 'POST',
 };
 
-const ErrorText = {
+export const ErrorText = {
   [Method.GET]: 'Не удалось загрузить данные. Попробуйте ещё раз',
   [Method.POST]: 'Не удалось отправить данные формы',
 };
