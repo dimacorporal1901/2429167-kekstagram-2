@@ -1,5 +1,5 @@
 import './api';
-import { ErrorText, sendData } from './api';
+import { sendData } from './api';
 import { onEffectChange } from './effects-slider';
 import { isEscapeKey, showAlert } from './util';
 import { pristine, resetForm } from './validation';
@@ -81,7 +81,7 @@ const unblockSubmitButton = () => {
 };
 
 const submitForm = (onSuccess) => {
-  photoEditorForm.addEventListener('submit', (evt) => {
+  submitButton.addEventListener('submit', (evt) => {
     evt.preventDefault();
 
     const isValid = pristine.validate();
@@ -100,3 +100,5 @@ const submitForm = (onSuccess) => {
     }
   });
 };
+
+export { submitForm, closePhotoEditor };
