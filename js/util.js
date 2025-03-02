@@ -27,9 +27,9 @@ function createRandomIdFromRangeGenerator (min, max) {
 const isEscapeKey = (evt) => evt.key === 'Escape';
 
 const showAlert = () => {
-  const alert = document.querySelector('#error');
+  const alert = document.querySelector('#error').content.querySelector('.error');
   const alertText = alert.querySelector('.error__title');
-  alertText.textContent = ErrorText;
+  alertText.textContent = ErrorText.POST;
 
   document.body.append(alert);
 

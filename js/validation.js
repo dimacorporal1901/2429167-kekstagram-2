@@ -1,4 +1,5 @@
 import { sendData } from './api.js';
+import { closePhotoEditor } from './popup-form.js';
 import { isEscapeKey, showAlert } from './util.js';
 
 const MAX_SYMBOLS = 20;
@@ -96,23 +97,19 @@ const unblockSubmitButton = () => {
   submitButton.textContent = SubmitButtonText.IDLE;
 };
 
-export const submitForm = (onSuccess) => {
-  photoEditorForm.addEventListener('submit', (evt) => {
-    evt.preventDefault();
 
-    const isValid = pristine.validate();
-    if (isValid) {
-      blockSubmitButton();
-      sendData(new FormData(evt.target))
-        .then(onSuccess)
-        .catch(
-          (err) => {
-            showAlert(err);
-          }
-        )
-        .finally(() => {
-          unblockSubmitButton();
-        });
-    }
-  });
-};
+uploadForm.addEventListener('submit', (evt) => {
+  evt.preventDefault();
+
+  const isValid = pristine.validate();
+  if (isValid) {
+    blockSubmitButton();
+    sendData(new FormData(evt.target))
+      .then(() => {
+        closePhotoEditor();
+      })
+      .catch(showAlert)
+      .finally(unblockSubmitButton);
+  }
+});
+
