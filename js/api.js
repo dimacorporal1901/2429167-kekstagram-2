@@ -15,7 +15,7 @@ export const ErrorText = {
   [Method.POST]: 'Не удалось отправить данные формы',
 };
 
-const load = (route, errorText, method = Method.GET, body = null) =>
+const load = (route, method = Method.GET, body = null) =>
   fetch(`${BASE_URL}${route}`, {method, body})
     .then((response) => {
       if(!response.ok) {
@@ -24,7 +24,7 @@ const load = (route, errorText, method = Method.GET, body = null) =>
       return response.json();
     })
     .catch(() => {
-      throw new Error(errorText);
+      throw new Error(ErrorText[method]);
     });
 
 const getData = () => load(Route.GET_DATA);

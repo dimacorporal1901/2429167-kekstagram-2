@@ -1,13 +1,7 @@
 import './api';
-import { sendData } from './api';
 import { onEffectChange } from './effects-slider';
-import { isEscapeKey, showAlert } from './util';
-import { pristine, resetForm } from './validation';
-
-const SubmitButtonText = {
-  IDLE: 'Опубликовать',
-  SENDING: 'Публикую...',
-};
+import { isEscapeKey } from './util';
+import { resetForm } from './validation';
 
 const uploadFileControl = document.querySelector('.img-upload__start');
 const pageBody = document.querySelector('body');
@@ -19,7 +13,6 @@ const scaleControl = photoEditorForm.querySelector('.scale__control--value');
 const smaller = photoEditorForm.querySelector('.scale__control--smaller');
 const bigger = photoEditorForm.querySelector('.scale__control--bigger');
 const effectsList = photoEditorForm.querySelector('.effects__list');
-const submitButton = photoEditorForm.querySelector('.img-upload__submit');
 
 let photoScale = 1;
 const SCALE_STEP = 0.25;
@@ -70,35 +63,4 @@ smaller.addEventListener('click', onSmallerClick);
 bigger.addEventListener('click', onBiggerClick);
 effectsList.addEventListener('change', onEffectChange);
 
-const blockSubmitButton = () => {
-  submitButton.disabled = true;
-  submitButton.textContent = SubmitButtonText.SENDING;
-};
-
-const unblockSubmitButton = () => {
-  submitButton.disabled = false;
-  submitButton.textContent = SubmitButtonText.IDLE;
-};
-
-const submitForm = (onSuccess) => {
-  submitButton.addEventListener('submit', (evt) => {
-    evt.preventDefault();
-
-    const isValid = pristine.validate();
-    if (isValid) {
-      blockSubmitButton();
-      sendData(new FormData(evt.target))
-        .then(onSuccess)
-        .catch(
-          (err) => {
-            showAlert(err);
-          }
-        )
-        .finally(() => {
-          unblockSubmitButton();
-        });
-    }
-  });
-};
-
-export { submitForm, closePhotoEditor };
+export { closePhotoEditor };
