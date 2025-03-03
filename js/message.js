@@ -15,6 +15,13 @@ export const showAlert = () => {
   }, ALERT_SHOW_TIME);
 };
 
+export const showDataAlert = () => {
+  const dataAlert = document.querySelector('#data-error').content.querySelector('.data-error');
+  const dataAlertClone = dataAlert.cloneNode(true);
+
+  document.body.appendChild(dataAlertClone);
+};
+
 export const showSuccessMessage = () => {
   const message = document.querySelector('#success').content.querySelector('.success');
   const messageClone = message.cloneNode(true);
