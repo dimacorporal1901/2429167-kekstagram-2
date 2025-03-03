@@ -1,5 +1,4 @@
 import { ErrorText } from './api.js';
-import { isEscapeKey } from './util.js';
 
 const ALERT_SHOW_TIME = 5000;
 
@@ -14,13 +13,6 @@ export const showAlert = () => {
 
   alertButton.addEventListener('click', () => {
     document.body.removeChild(alertClone);
-  });
-
-  alertClone.addEventListener('keydown', (evt) => {
-    if (isEscapeKey(evt)) {
-      evt.preventDefault();
-      document.body.removeChild(alertClone);
-    }
   });
 
   setTimeout(() => {
@@ -38,7 +30,12 @@ export const showDataAlert = () => {
 export const showSuccessMessage = () => {
   const message = document.querySelector('#success').content.querySelector('.success');
   const messageClone = message.cloneNode(true);
+  const messageButton = messageClone.querySelector('.success__button');
   document.body.appendChild(messageClone);
+
+  messageButton.addEventListener('click', () => {
+    document.body.removeChild(messageClone);
+  });
 
   setTimeout(() => {
     document.body.removeChild(messageClone);
