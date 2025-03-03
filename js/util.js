@@ -1,7 +1,3 @@
-import { ErrorText } from './api';
-
-const ALERT_SHOW_TIME = 5000;
-
 function getRandomInteger(min, max) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
@@ -26,16 +22,4 @@ function createRandomIdFromRangeGenerator (min, max) {
 
 const isEscapeKey = (evt) => evt.key === 'Escape';
 
-const showAlert = () => {
-  const alert = document.querySelector('#error').content.querySelector('.error');
-  const alertText = alert.querySelector('.error__title');
-  alertText.textContent = ErrorText.POST;
-
-  document.body.append(alert);
-
-  setTimeout(() => {
-    alert.remove();
-  }, ALERT_SHOW_TIME);
-};
-
-export { getRandomInteger, getRandomArrayElement, createRandomIdFromRangeGenerator, isEscapeKey, showAlert };
+export { getRandomInteger, getRandomArrayElement, createRandomIdFromRangeGenerator, isEscapeKey };

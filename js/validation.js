@@ -1,6 +1,7 @@
 import { sendData } from './api.js';
+import { showAlert, showSuccessMessage } from './message.js';
 import { closePhotoEditor } from './popup-form.js';
-import { isEscapeKey, showAlert } from './util.js';
+import { isEscapeKey } from './util.js';
 
 const MAX_SYMBOLS = 20;
 const MAX_HASHTAGS = 5;
@@ -107,6 +108,7 @@ uploadForm.addEventListener('submit', (evt) => {
     sendData(new FormData(evt.target))
       .then(() => {
         closePhotoEditor();
+        showSuccessMessage();
       })
       .catch(showAlert)
       .finally(unblockSubmitButton);
