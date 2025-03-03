@@ -6,20 +6,21 @@ export const showAlert = () => {
   const alert = document.querySelector('#error').content.querySelector('.error');
   const alertText = alert.querySelector('.error__title');
   alertText.textContent = ErrorText.POST;
+  const alertClone = alert.cloneNode(true);
 
-  document.body.append(alert);
+  document.body.appendChild(alertClone);
 
   setTimeout(() => {
-    alert.remove();
+    document.body.removeChild(alertClone);
   }, ALERT_SHOW_TIME);
 };
 
 export const showSuccessMessage = () => {
   const message = document.querySelector('#success').content.querySelector('.success');
-
-  document.body.append(message);
+  const messageClone = message.cloneNode(true);
+  document.body.appendChild(messageClone);
 
   setTimeout(() => {
-    message.remove();
+    document.body.removeChild(messageClone);
   }, ALERT_SHOW_TIME);
 };
