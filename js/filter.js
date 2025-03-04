@@ -7,10 +7,10 @@ const FILTER = {
   discussed: 'filter-discussed',
 };
 
-// const SORTFUNC = {
-//   random: () => 0.5 - Math.random(),
-//   discussed: (a, b) => b.comments.length - a.comments.length,
-// };
+const SORTFUNC = {
+  random: () => 0.5 - Math.random(),
+  discussed: (a, b) => b.comments.length - a.comments.length,
+};
 
 const MAX_PICTURE_COUNT = 10;
 
@@ -30,7 +30,6 @@ function onFilterChange(evt) {
   if (activeButton === targetButton) {
     return;
   }
-
   activeButton.classList.toggle(ACTIVE_BUTTON_CLASS);
   targetButton.classList.toggle(ACTIVE_BUTTON_CLASS);
   currentFilter = targetButton.getAttribute('id');
@@ -42,14 +41,15 @@ function applyFilter() {
   let filteredPictures = [];
   if (currentFilter === FILTER.default) {
     filteredPictures = pictures;
+    console.log(filteredPictures);
   }
-
   if (currentFilter === FILTER.random) {
-    filteredPictures = pictures.filter(() => 0.5 - Math.random()).slice(0, MAX_PICTURE_COUNT);
+    filteredPictures = pictures.toSorted(SORTFUNC.random).slice(0, MAX_PICTURE_COUNT);
+    console.log(filteredPictures);
   }
-
   if (currentFilter === FILTER.discussed) {
-    filteredPictures = pictures.filter((a, b) => b.comments.length - a.comments.length);
+    filteredPictures = pictures.toSorted(SORTFUNC.discussed);
+    console.log(filteredPictures);
   }
   debounceRender(filteredPictures);
 }
