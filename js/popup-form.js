@@ -1,4 +1,3 @@
-import './api';
 import { onEffectChange } from './effects-slider';
 import { isEscapeKey } from './util';
 import { resetForm } from './validation';
@@ -22,10 +21,11 @@ const onPhotoEditorBtnClick = () => {
 };
 
 const onDocumentKeydown = (evt) => {
-  if (isEscapeKey(evt)) {
-    evt.preventDefault();
-    closePhotoEditor();
+  const isErrorUploadVisible = document.querySelector('.error');
+  if (isErrorUploadVisible) {
+    return;
   }
+  return isEscapeKey(evt) && closePhotoEditor();
 };
 
 function closePhotoEditor () {

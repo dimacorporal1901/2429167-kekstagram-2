@@ -1,23 +1,13 @@
-import { ErrorText } from './api.js';
+import { isEscapeKey } from './util';
 
 const ALERT_SHOW_TIME = 5000;
 
-export const showAlert = () => {
-  const alert = document.querySelector('#error').content.querySelector('.error');
-  const alertText = alert.querySelector('.error__title');
-  alertText.textContent = ErrorText.POST;
-  const alertClone = alert.cloneNode(true);
-  const alertButton = alertClone.querySelector('.error__button');
+const removeMessage = (element) => element.remove();
 
-  document.body.appendChild(alertClone);
-
-  alertButton.addEventListener('click', () => {
-    document.body.removeChild(alertClone);
-  });
-
-  setTimeout(() => {
-    document.body.removeChild(alertClone);
-  }, ALERT_SHOW_TIME);
+const removeMessageEsc = (event, element) => {
+  if (isEscapeKey(event)) {
+    removeMessage(element);
+  }
 };
 
 export const showDataAlert = () => {
@@ -25,19 +15,23 @@ export const showDataAlert = () => {
   const dataAlertClone = dataAlert.cloneNode(true);
 
   document.body.appendChild(dataAlertClone);
-};
-
-export const showSuccessMessage = () => {
-  const message = document.querySelector('#success').content.querySelector('.success');
-  const messageClone = message.cloneNode(true);
-  const messageButton = messageClone.querySelector('.success__button');
-  document.body.appendChild(messageClone);
-
-  messageButton.addEventListener('click', () => {
-    document.body.removeChild(messageClone);
-  });
 
   setTimeout(() => {
-    document.body.removeChild(messageClone);
+    document.body.removeChild(dataAlertClone);
   }, ALERT_SHOW_TIME);
+};
+
+export const showMessage = (tpl) => {
+  const message = document.querySelector(`#${tpl}`).content.querySelector(`.${tpl}`);
+  const messageClone = message.cloneNode(true);
+  const messageButton = messageClone.querySelector('button');
+
+  document.body.appendChild(messageClone);
+  document.addEventListener('keydown', (evt) => removeMessageEsc(evt, messageClone));
+
+  messageButton.addEventListener('click', (event) => {
+    if (event.target === messageButton || event.target === messageClone) {
+      removeMessage(messageClone);
+    }
+  });
 };

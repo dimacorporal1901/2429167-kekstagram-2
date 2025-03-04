@@ -1,5 +1,5 @@
 import { sendData } from './api.js';
-import { showAlert, showSuccessMessage } from './message.js';
+import { showMessage } from './message.js';
 import { closePhotoEditor } from './popup-form.js';
 import { isEscapeKey } from './util.js';
 
@@ -108,9 +108,9 @@ uploadForm.addEventListener('submit', (evt) => {
     sendData(new FormData(evt.target))
       .then(() => {
         closePhotoEditor();
-        showSuccessMessage();
+        showMessage('success');
       })
-      .catch(showAlert)
+      .catch(() => showMessage('error'))
       .finally(unblockSubmitButton);
   }
 });
