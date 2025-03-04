@@ -1,11 +1,21 @@
+import { sendData } from './api.js';
+import { showMessage } from './message.js';
+import { closePhotoEditor } from './popup-form.js';
 import { isEscapeKey } from './util.js';
 
 const MAX_SYMBOLS = 20;
 const MAX_HASHTAGS = 5;
 
+const SubmitButtonText = {
+  IDLE: 'Опубликовать',
+  SENDING: 'Публикую...',
+};
+
 const uploadForm = document.querySelector('.img-upload__form');
 const hashtagForm = uploadForm.querySelector('.text__hashtags');
 const commentForm = uploadForm.querySelector('.text__description');
+const photoEditorForm = document.querySelector('.img-upload__overlay');
+const submitButton = photoEditorForm.querySelector('.img-upload__submit');
 
 let errorMessage = '';
 
@@ -62,7 +72,7 @@ const isHashtagValide = (value) => {
   });
 };
 
-const pristine = new Pristine(uploadForm, {
+export const pristine = new Pristine(uploadForm, {
   classTo: 'img-upload__field-wrapper',
   errorTextClass: 'img-upload__field-wrapper--error',
   errorTextParent: 'img-upload__field-wrapper',
@@ -77,3 +87,31 @@ export const resetForm = () => {
   uploadForm.reset();
   pristine.reset();
 };
+
+const blockSubmitButton = () => {
+  submitButton.disabled = true;
+  submitButton.textContent = SubmitButtonText.SENDING;
+};
+
+const unblockSubmitButton = () => {
+  submitButton.disabled = false;
+  submitButton.textContent = SubmitButtonText.IDLE;
+};
+
+
+uploadForm.addEventListener('submit', (evt) => {
+  evt.preventDefault();
+
+  const isValid = pristine.validate();
+  if (isValid) {
+    blockSubmitButton();
+    sendData(new FormData(evt.target))
+      .then(() => {
+        closePhotoEditor();
+        showMessage('success');
+      })
+      .catch(() => showMessage('error'))
+      .finally(unblockSubmitButton);
+  }
+});
+

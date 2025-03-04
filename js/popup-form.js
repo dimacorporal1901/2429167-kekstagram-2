@@ -21,10 +21,11 @@ const onPhotoEditorBtnClick = () => {
 };
 
 const onDocumentKeydown = (evt) => {
-  if (isEscapeKey(evt)) {
-    evt.preventDefault();
-    closePhotoEditor();
+  const isErrorUploadVisible = document.querySelector('.error');
+  if (isErrorUploadVisible) {
+    return;
   }
+  return isEscapeKey(evt) && closePhotoEditor();
 };
 
 function closePhotoEditor () {
@@ -61,3 +62,5 @@ const onBiggerClick = () => {
 smaller.addEventListener('click', onSmallerClick);
 bigger.addEventListener('click', onBiggerClick);
 effectsList.addEventListener('change', onEffectChange);
+
+export { closePhotoEditor };
