@@ -1,4 +1,4 @@
-import { renderBigPhoto } from './popup';
+import { renderPictures } from './pictures';
 import { debounce } from './util';
 
 const FILTER = {
@@ -18,8 +18,9 @@ let currentFilter = FILTER.default;
 let pictures = [];
 const imageFilters = document.querySelector('.img-filters');
 const ACTIVE_BUTTON_CLASS = 'img-filters__button--active';
+const picturesContainer = document.querySelector('.pictures');
 
-const debounceRender = debounce(renderBigPhoto);
+const debounceRender = debounce(renderPictures);
 
 function onFilterChange(evt) {
   const targetButton = evt.target;
@@ -35,21 +36,19 @@ function onFilterChange(evt) {
   currentFilter = targetButton.getAttribute('id');
 
   applyFilter();
+  clearPhoto();
 }
 
 function applyFilter() {
   let filteredPictures = [];
   if (currentFilter === FILTER.default) {
     filteredPictures = pictures;
-    console.log(filteredPictures);
   }
   if (currentFilter === FILTER.random) {
     filteredPictures = pictures.toSorted(SORTFUNC.random).slice(0, MAX_PICTURE_COUNT);
-    console.log(filteredPictures);
   }
   if (currentFilter === FILTER.discussed) {
     filteredPictures = pictures.toSorted(SORTFUNC.discussed);
-    console.log(filteredPictures);
   }
   debounceRender(filteredPictures);
 }
@@ -58,6 +57,10 @@ function configFilter(data) {
   imageFilters.classList.remove('img-filters--inactive');
   imageFilters.addEventListener('click', onFilterChange);
   pictures = data;
+}
+
+function clearPhoto() {
+  picturesContainer.querySelectorAll('a.picture').forEach((item) => item.remove());
 }
 
 export { configFilter };
