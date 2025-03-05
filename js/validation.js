@@ -98,7 +98,6 @@ const unblockSubmitButton = () => {
   submitButton.textContent = SubmitButtonText.IDLE;
 };
 
-
 uploadForm.addEventListener('submit', (evt) => {
   evt.preventDefault();
 
